@@ -43,7 +43,7 @@ server.listen(PORT, () => {
 import axios from 'axios';
 import cron from 'node-cron';
 
-const url = 'https://sarim-chat-app.onrender.com/';
+const url = 'https://sarim-chat-apps.onrender.com/';
 
 
 // Function to send a request
