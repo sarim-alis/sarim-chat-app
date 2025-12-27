@@ -32,7 +32,7 @@ app.get("*", (req, res) => {
 
 // app.get("/", (req, res) => {
     // root route http://localhost:5000/
-//     res.send("Hello Ruby love☘️");
+//     res.send("Hello☘️");
 // });
 
 server.listen(PORT, () => {
