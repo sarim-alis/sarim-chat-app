@@ -50,7 +50,7 @@ const url = 'https://sarim-chat-apps.onrender.com/';
 const sendRequest = async () => {
   try {
     const response = await axios.get(url);
-    console.log(`Request sent at ${new Date().toLocaleTimeString()}:`, response.status);
+    // console.log(`Request sent at ${new Date().toLocaleTimeString()}:`, response.status);
   } catch (error) {
     console.error(`Error sending request at ${new Date().toLocaleTimeString()}:`, error.message);
   }
