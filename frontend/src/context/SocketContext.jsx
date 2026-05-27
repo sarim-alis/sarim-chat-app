@@ -15,7 +15,7 @@ export const SocketContextProvider = ({children}) => {
 
     useEffect(() => {
         if(authUser) {
-            const socket = io("https://sarim-chat-apps.onrender.com", {
+            const socket = io(import.meta.env.MODE === 'development' ? "http://localhost:5000" : "https://sarim-chat-apps.onrender.com", {
                 query:{
                     userId: authUser._id
                 }
