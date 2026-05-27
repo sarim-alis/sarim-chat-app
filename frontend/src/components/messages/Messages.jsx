@@ -15,18 +15,20 @@ const Messages = () => {
 	// 	}, 100);
 	// }, [messages]);
 
+	const messagesArray = Array.isArray(messages) ? messages : [];
+
 	return (
 		<div className='px-4 flex-1 overflow-auto'>
 			{!loading &&
-				messages.length > 0 &&
-				messages.map((message) => (
+				messagesArray.length > 0 &&
+				messagesArray.map((message) => (
 					<div key={message._id} ref={lastMessageRef}>
 						<Message message={message} />
 					</div>
 				))}
 
 			{loading && [...Array(3)].map((_, idx) => <MessageSkeleton key={idx} />)}
-			{!loading && messages.length === 0 && (
+			{!loading && messagesArray.length === 0 && (
 				<p className='text-center text-white'>Send a message to start the conversation 🧸</p>
 			)}
 		</div>

@@ -15,7 +15,7 @@ export const SocketContextProvider = ({children}) => {
 
     useEffect(() => {
         if(authUser) {
-            const socket = io("https://sarim-chat-app.onrender.com", {
+            const socket = io("https://sarim-chat-apps.onrender.com", {
                 query:{
                     userId: authUser._id
                 }
@@ -23,9 +23,8 @@ export const SocketContextProvider = ({children}) => {
 
             setSocket(socket);
 
-            // Socket.on() is used to listen to events. Can be used for both on client and server side rendering.
             socket.on("getOnlineUsers", (users) => {
-            setOnlineUsers(users);
+                setOnlineUsers(users);
             });
 
             return () => socket.close();

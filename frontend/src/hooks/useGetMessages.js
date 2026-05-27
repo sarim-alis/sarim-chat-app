@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import useConversation from "../zustand/useConversation";
 import toast from "react-hot-toast";
 
 const useGetMessages = () => {
     const [loading, setLoading] = useState(false)
     const {messages, setMessages, selectedConversation} = useConversation();
+    const lastFetchedConversationId = useRef(null);
 
     useEffect(() => {
     const getMessages = async () => {
@@ -14,6 +15,7 @@ const useGetMessages = () => {
           const data = await res.json();
         if(data.error) throw new Error(data.error);
         setMessages(data);
+        lastFetchedConversationId.current = selectedConversation._id;
         } catch (error) {
           toast.error(error.message);
         } finally {
@@ -21,8 +23,15 @@ const useGetMessages = () => {
         }
     };
 
-    if (selectedConversation?._id) getMessages();
-  }, [selectedConversation?._id, setMessages]);
+    if (selectedConversation?._id) {
+        if (lastFetchedConversationId.current !== selectedConversation._id) {
+            getMessages();
+        }
+    } else {
+        setMessages([]);
+        lastFetchedConversationId.current = null;
+    }
+  }, [selectedConversation?._id]);
 
     return {messages, loading};
 };
